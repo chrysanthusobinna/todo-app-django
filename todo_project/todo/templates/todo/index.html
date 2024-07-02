@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+			 
+						<th>Tittle</th>
+						<th>Date</th>
+						<th>Status</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+ 
+
+        {% for item in todo_items %}
+
+					<tr>
+						<td> {{ item.title }}</td>
+						<td> {{ item.created }}</td>
+						<td>
+                            {% if not item.completed %}
+                            <b class="text-danger">(NOT COMPLETED)<b>
+  
+                            {% else %}
+                            <b class="text-success">(COMPLETED)<b>
+                            {% endif %}
+
+                        </td>
+						<td>
+							<a href="{% url 'view_todo' item.id %}" class="btn btn-primary btn-sm "  ><i style = "color: white;" class="material-icons"  >visibility</i> </a>
+							<a href="{% url 'edit_todo' item.id %}" class="btn btn-success btn-sm "  ><i style = "color: white;" class="material-icons"   >edit</i> </a>
+							<a href="{% url 'delete_todo' item.id %}" class="btn btn-danger btn-sm "  ><i style = "color: white;" class="material-icons"   >delete</i> </a>
+							
+                            
+						</td>
+					</tr>
+
+        {% endfor %}
+
+				</tbody>
+			</table>
+ 
+{% endblock %}
